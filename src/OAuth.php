@@ -4,6 +4,7 @@ namespace CarloNicora\Minimalism\Services\OAuth;
 use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Enums\HttpCode;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
+use CarloNicora\Minimalism\Services\OAuth\Data\App;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
 use CarloNicora\Minimalism\Services\OAuth\IO\AppIO;
@@ -36,6 +37,16 @@ class OAuth extends AbstractService
     ): bool
     {
         return $this->MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN;
+    }
+
+    /**
+     * @return App
+     * @throws Exception
+     */
+    public function getApp(
+    ): App
+    {
+        return $this->objectFactory->create(AppIO::class)->readByToken($this->token->getToken());
     }
 
     /**
@@ -79,6 +90,17 @@ class OAuth extends AbstractService
             return;
         }
 
+        $this->loadToken($token);
+    }
+
+    /**
+     * @param string $token
+     * @return void
+     */
+    public function loadToken(
+        string $token,
+    ): void
+    {
         try {
             $this->token = $this->objectFactory->create(TokenIO::class)->readByToken($token);
         } catch (Exception) {

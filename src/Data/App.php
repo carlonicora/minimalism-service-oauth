@@ -108,4 +108,13 @@ class App extends AbstractDataObject
     {
         return $this->appId;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(
+    ): string
+    {
+        return $this->name;
+    }
 }
