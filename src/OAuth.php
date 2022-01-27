@@ -16,7 +16,7 @@ use RuntimeException;
 class OAuth extends AbstractService
 {
     /** @var array|null */
-    private ?array $headers;
+    private ?array $headers=null;
 
     /** @var Token|null  */
     private ?Token $token=null;

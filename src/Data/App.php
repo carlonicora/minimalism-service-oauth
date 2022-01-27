@@ -27,8 +27,8 @@ class App extends AbstractDataObject
     /** @var string  */
     private string $clientId;
 
-    /** @var string  */
-    private string $clientSecret;
+    /** @var string|null  */
+    private ?string $clientSecret=null;
 
     /** @var int  */
     private int $creationTime;

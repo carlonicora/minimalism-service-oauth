@@ -7,11 +7,11 @@ use CarloNicora\Minimalism\Services\Cacher\Factories\CacheBuilderFactory;
 class CacheFactory extends CacheBuilderFactory
 {
     /**
-     * @param int $token
+     * @param string $token
      * @return CacheBuilderInterface
      */
     public static function token(
-        int $token
+        string $token
     ): CacheBuilderInterface
     {
         return self::create(
@@ -21,11 +21,11 @@ class CacheFactory extends CacheBuilderFactory
     }
 
     /**
-     * @param int $token
+     * @param string $token
      * @return CacheBuilderInterface
      */
     public static function app(
-        int $token
+        string $token
     ): CacheBuilderInterface
     {
         return self::create(
@@ -35,11 +35,11 @@ class CacheFactory extends CacheBuilderFactory
     }
 
     /**
-     * @param int $clientId
+     * @param string $clientId
      * @return CacheBuilderInterface
      */
     public static function appClientId(
-        int $clientId
+        string $clientId
     ): CacheBuilderInterface
     {
         return self::create(
