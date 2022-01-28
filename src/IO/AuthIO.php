@@ -1,12 +1,12 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Services\DataMapper\Abstracts\AbstractLoader;
+use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractIO;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
 
-class AuthIO extends AbstractLoader
+class AuthIO extends AbstractIO
 {
     /**
      * @param string $code

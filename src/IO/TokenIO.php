@@ -1,13 +1,12 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Services\DataMapper\Abstracts\AbstractLoader;
+use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractIO;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\TokensTable;
-use CarloNicora\Minimalism\Services\OAuth\Factories\CacheFactory;
 use Exception;
 
-class TokenIO extends AbstractLoader
+class TokenIO extends AbstractIO
 {
     /**
      * @param string $token
@@ -23,7 +22,6 @@ class TokenIO extends AbstractLoader
             tableInterfaceClassName: TokensTable::class,
             functionName: 'readByToken',
             parameters: [$token],
-            cacheBuilder: CacheFactory::token($token),
         );
 
         return $this->returnSingleObject(

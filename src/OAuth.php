@@ -79,7 +79,7 @@ class OAuth extends AbstractService
             $this->headers = getallheaders();
         }
 
-        $bearer = $this->headers['Authorization'];
+        $bearer = $this->headers['Authorization'] ?? null;
         if ($bearer === null){
             return;
         }

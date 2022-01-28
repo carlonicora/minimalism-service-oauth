@@ -1,8 +1,7 @@
 <?php
-
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
-use CarloNicora\Minimalism\Services\DataMapper\Abstracts\AbstractDataObject;
+use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractDataObject;
 
 class App extends AbstractDataObject
 {

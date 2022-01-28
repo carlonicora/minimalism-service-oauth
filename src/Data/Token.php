@@ -3,7 +3,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
 use CarloNicora\Minimalism\Factories\ObjectFactory;
-use CarloNicora\Minimalism\Services\DataMapper\Abstracts\AbstractDataObject;
+use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractDataObject;
 use Exception;
 
 class Token extends AbstractDataObject
