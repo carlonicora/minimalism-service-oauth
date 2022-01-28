@@ -4,6 +4,7 @@ namespace CarloNicora\Minimalism\Services\OAuth;
 use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Enums\HttpCode;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
+use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
 use CarloNicora\Minimalism\Services\OAuth\Data\App;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
@@ -13,7 +14,7 @@ use CarloNicora\Minimalism\Services\OAuth\IO\TokenIO;
 use Exception;
 use RuntimeException;
 
-class OAuth extends AbstractService
+class OAuth extends AbstractService implements SecurityInterface
 {
     /** @var array|null */
     private ?array $headers=null;
@@ -28,6 +29,15 @@ class OAuth extends AbstractService
         private bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN=false,
     )
     {
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getBaseInterface(
+    ): ?string
+    {
+        return SecurityInterface::class;
     }
 
     /**

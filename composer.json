@@ -1,7 +1,7 @@
 {
   "name": "carlonicora/minimalism-service-oauth",
   "description": "Oauth service for minimalism",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "https://carlonicora.com",
   "time": "2022-01-26",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "ext-redis": "*",
     "carlonicora/minimalism": "~13.0",
     "carlonicora/minimalism-interface-data": "~1.0",
+    "carlonicora/minimalism-interface-security": "~1.0",
     "carlonicora/minimalism-service-mysql": "~5.0"
   },
   "autoload": {
