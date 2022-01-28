@@ -1,7 +1,7 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractIO;
+use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractIO;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;

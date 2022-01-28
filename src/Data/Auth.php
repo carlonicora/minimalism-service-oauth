@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
 use CarloNicora\Minimalism\Factories\ObjectFactory;
-use CarloNicora\Minimalism\Services\OAuth\Abstracts\AbstractDataObject;
+use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractDataObject;
 use Exception;
 
 class Auth extends AbstractDataObject
