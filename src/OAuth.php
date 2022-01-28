@@ -31,6 +31,16 @@ class OAuth extends AbstractService
     }
 
     /**
+     * @return void
+     */
+    public function destroy(
+    ): void
+    {
+        $this->headers = null;
+        $this->token = null;
+    }
+
+    /**
      * @return bool
      */
     public function allowVisitorsToken(
