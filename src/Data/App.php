@@ -2,8 +2,9 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
 use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractDataObject;
+use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 
-class App extends AbstractDataObject
+class App extends AbstractDataObject implements ApplicationInterface
 {
     /** @var int  */
     private int $appId;
@@ -102,7 +103,7 @@ class App extends AbstractDataObject
     /**
      * @return int
      */
-    public function getAppId(
+    public function getId(
     ): int
     {
         return $this->appId;

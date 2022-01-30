@@ -56,7 +56,7 @@ class Token extends AbstractModel
         } else {
             $app = $this->objectFactory->create(AppIO::class)->readByClientId($payload['client_id']);
 
-            $token->setAppId($app->getAppId());
+            $token->setAppId($app->getId());
             $token->setUserId((int)(microtime(true)*1000));
             $token->setIsUser(false);
         }

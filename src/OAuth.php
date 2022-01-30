@@ -4,8 +4,8 @@ namespace CarloNicora\Minimalism\Services\OAuth;
 use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Enums\HttpCode;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
+use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
-use CarloNicora\Minimalism\Services\OAuth\Data\App;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
 use CarloNicora\Minimalism\Services\OAuth\IO\AppIO;
@@ -60,11 +60,11 @@ class OAuth extends AbstractService implements SecurityInterface
     }
 
     /**
-     * @return App
+     * @return ApplicationInterface
      * @throws Exception
      */
     public function getApp(
-    ): App
+    ): ApplicationInterface
     {
         return $this->objectFactory->create(AppIO::class)->readByToken($this->token->getToken());
     }
@@ -144,7 +144,7 @@ class OAuth extends AbstractService implements SecurityInterface
         $app = $this->objectFactory->create(AppIO::class)->readByClientId($clientId);
 
         $auth = new Auth($this->objectFactory);
-        $auth->setAppId($app->getAppId());
+        $auth->setAppId($app->getId());
         $auth->setUserId($userId);
         $auth->setExpirationSeconds(30);
         $auth = $this->objectFactory->create(AuthIO::class)->insert($auth);
