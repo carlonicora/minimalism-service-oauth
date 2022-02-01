@@ -1,10 +1,13 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
-use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractDataObject;
+use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
 
-class App extends AbstractDataObject implements ApplicationInterface
+class App extends AbstractSqlDataObject implements ApplicationInterface
 {
     /** @var int  */
     private int $appId;
@@ -53,6 +56,15 @@ class App extends AbstractDataObject implements ApplicationInterface
     }
 
     /**
+     * @return SqlTableInterface
+     */
+    public function getTable(
+    ): SqlTableInterface
+    {
+        return AppsTable::tableName;
+    }
+
+    /**
      * @return array
      */
     public function export(
@@ -71,6 +83,15 @@ class App extends AbstractDataObject implements ApplicationInterface
         $response['creationTime'] = date('Y-m-d H:i:s', $this->creationTime ?? time());
 
         return $response;
+    }
+
+    /**
+     * @return ResourceObject
+     */
+    public function generateResource(
+    ): ResourceObject
+    {
+        return new ResourceObject();
     }
 
     /**

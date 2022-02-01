@@ -1,12 +1,13 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractIO;
+use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
 
-class AuthIO extends AbstractIO
+class AuthIO extends AbstractSqlIO
 {
     /**
      * @param string $code
@@ -17,15 +18,14 @@ class AuthIO extends AbstractIO
         string $code,
     ): Auth
     {
-        /** @see AuthsTable::readByCode() */
-        $recordset = $this->data->read(
-            tableInterfaceClassName: AuthsTable::class,
-            functionName: 'readByCode',
-            parameters: [$code],
-        );
+        $factory = SqlFactory::create()
+            ->selectAll(AuthsTable::tableName)
+            ->addParameter(AuthsTable::code, $code);
 
         return $this->returnSingleObject(
-            recordset: $recordset,
+            recordset: $this->data->read(
+                factory: $factory,
+            ),
             objectType: Auth::class,
         );
     }
@@ -40,9 +40,8 @@ class AuthIO extends AbstractIO
     ): Auth
     {
         return $this->returnSingleObject(
-            recordset: $this->data->insert(
-                tableInterfaceClassName: AuthsTable::class,
-                records: [$auth->export()],
+            recordset: $this->data->create(
+                factory: $auth,
             ),
             objectType: Auth::class,
         );

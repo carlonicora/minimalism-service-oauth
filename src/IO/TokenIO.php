@@ -1,12 +1,13 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractIO;
+use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\TokensTable;
 use Exception;
 
-class TokenIO extends AbstractIO
+class TokenIO extends AbstractSqlIO
 {
     /**
      * @param string $token
@@ -17,15 +18,14 @@ class TokenIO extends AbstractIO
         string $token,
     ): Token
     {
-        /** @see TokensTable::readByToken() */
-        $recordset = $this->data->read(
-            tableInterfaceClassName: TokensTable::class,
-            functionName: 'readByToken',
-            parameters: [$token],
-        );
+        $factory = SqlFactory::create()
+            ->selectAll(TokensTable::tableName)
+            ->addParameter(TokensTable::token, $token);
 
         return $this->returnSingleObject(
-            recordset: $recordset,
+            recordset: $this->data->read(
+                factory: $factory,
+            ),
             objectType: Token::class,
         );
     }
@@ -40,9 +40,8 @@ class TokenIO extends AbstractIO
     ): Token
     {
         return $this->returnSingleObject(
-            recordset: $this->data->insert(
-                tableInterfaceClassName: TokensTable::class,
-                records: [$token->export()],
+            recordset: $this->data->create(
+                factory: $token,
             ),
             objectType: Token::class,
         );

@@ -1,39 +1,35 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables;
 
-use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractMySqlTable;
-use CarloNicora\Minimalism\Services\MySQL\Interfaces\FieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlFieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
 use Exception;
 
-class ScopesTable extends AbstractMySqlTable
+enum ScopesTable: string implements SqlTableInterface, SqlFieldInterface
 {
-    /** @var string */
-    protected static string $tableName = 'scopes';
+    use SqlTableTrait;
+    use SqlFieldTrait;
 
-    /** @var array  */
-    protected static array $fields = [
-        'scopeId'   => FieldInterface::INTEGER
-                    +  FieldInterface::PRIMARY_KEY
-                    +  FieldInterface::AUTO_INCREMENT,
-        'name'      => FieldInterface::STRING
-    ];
+    case tableName='scopes';
+
+    case scopeId='scopeId';
+    case name='name';
 
     /**
-     * @param int $appId
-     * @return array
+     * @return int
      * @throws Exception
      */
-    public function readByAppId(
-        int $appId,
-    ): array
+    public function getFieldDefinition(
+    ): int
     {
-        $this->sql = 'SELECT *'
-            . ' FROM ' . self::getTableName()
-            . ' JOIN ' . AppScopesTable::getTableName()
-            . ' ON ' . self::getTableName() . '.scopId=' . AppScopesTable::getTableName() . '.scopeId'
-            . ' WHERE ' . AppScopesTable::getTableName() . '.appId=?;';
-        $this->parameters = ['i', $appId];
-
-        return $this->functions->runRead();
+        return match($this) {
+            self::scopeId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
+            self::name => FieldType::String->value,
+            default => throw new Exception(),
+        };
     }
 }

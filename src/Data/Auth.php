@@ -1,11 +1,14 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
+use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\Minimalism\Factories\ObjectFactory;
-use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
 
-class Auth extends AbstractDataObject
+class Auth extends AbstractSqlDataObject
 {
     /** @var int  */
     private int $authId;
@@ -40,6 +43,15 @@ class Auth extends AbstractDataObject
     }
 
     /**
+     * @return SqlTableInterface
+     */
+    public function getTable(
+    ): SqlTableInterface
+    {
+        return AuthsTable::tableName;
+    }
+
+    /**
      * @param array $data
      * @return void
      */
@@ -69,6 +81,15 @@ class Auth extends AbstractDataObject
         $response['code'] = $this->code;
 
         return $response;
+    }
+
+    /**
+     * @return ResourceObject
+     */
+    public function generateResource(
+    ): ResourceObject
+    {
+        return new ResourceObject();
     }
 
     /**

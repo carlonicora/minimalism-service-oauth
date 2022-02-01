@@ -1,12 +1,15 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
-use CarloNicora\Minimalism\Interfaces\Data\Abstracts\AbstractIO;
+use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlJoinFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\App;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
+use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\TokensTable;
 use Exception;
 
-class AppIO extends AbstractIO
+class AppIO extends AbstractSqlIO
 {
     /**
      * @param string $token
@@ -17,15 +20,21 @@ class AppIO extends AbstractIO
         string $token,
     ): App
     {
-        /** @see AppsTable::readByToken() */
-        $recordset = $this->data->read(
-            tableInterfaceClassName: AppsTable::class,
-            functionName: 'readByToken',
-            parameters: [$token],
-        );
+        $factory = SqlFactory::create()
+            ->selectAll(AppsTable::tableName)
+            ->addJoin(
+                new SqlJoinFactory(
+                    joinedTable: TokensTable::tableName,
+                    primaryKey: AppsTable::appId,
+                    foreignKey: TokensTable::appId,
+                ),
+            )
+            ->addParameter(TokensTable::token, $token);
 
         return $this->returnSingleObject(
-            recordset: $recordset,
+            recordset: $this->data->read(
+                factory: $factory,
+            ),
             objectType: App::class,
         );
     }
@@ -39,15 +48,14 @@ class AppIO extends AbstractIO
         string $clientId,
     ): App
     {
-        /** @see AppsTable::readByClientId() */
-        $recordset = $this->data->read(
-            tableInterfaceClassName: AppsTable::class,
-            functionName: 'readByClientId',
-            parameters: [$clientId],
-        );
+        $factory = SqlFactory::create()
+            ->selectAll(AppsTable::tableName)
+            ->addParameter(AppsTable::clientId, $clientId);
 
         return $this->returnSingleObject(
-            recordset: $recordset,
+            recordset: $this->data->read(
+                factory: $factory
+            ),
             objectType: App::class,
         );
     }

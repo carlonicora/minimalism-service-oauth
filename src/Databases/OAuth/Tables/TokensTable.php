@@ -1,40 +1,39 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables;
 
-use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractMySqlTable;
-use CarloNicora\Minimalism\Services\MySQL\Interfaces\FieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlFieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
 use Exception;
 
-class TokensTable extends AbstractMySqlTable
+enum TokensTable: string implements SqlTableInterface, SqlFieldInterface
 {
-    /** @var string */
-    protected static string $tableName = 'tokens';
+    use SqlTableTrait;
+    use SqlFieldTrait;
 
-    /** @var array  */
-    protected static array $fields = [
-        'tokenId'   => FieldInterface::INTEGER
-                    +  FieldInterface::PRIMARY_KEY
-                    +  FieldInterface::AUTO_INCREMENT,
-        'appId'     => FieldInterface::INTEGER,
-        'userId'    => FieldInterface::INTEGER,
-        'isUser'    => FieldInterface::INTEGER,
-        'token'     => FieldInterface::STRING
-    ];
+    case tableName='tokens';
+
+    case tokenId='tokenId';
+    case appId='appId';
+    case userId='userId';
+    case isUser='isUser';
+    case token='token';
 
     /**
-     * @param string $token
-     * @return array
+     * @return int
      * @throws Exception
      */
-    public function readByToken(
-        string $token,
-    ): array
+    public function getFieldDefinition(
+    ): int
     {
-        $this->sql = 'SELECT *'
-            . ' FROM ' . self::getTableName()
-            . ' WHERE token=?;';
-        $this->parameters = ['s', $token];
-
-        return $this->functions->runRead();
+        return match($this) {
+            self::tokenId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
+            self::userId,self::appId,self::isUser => FieldType::Integer->value,
+            self::token => FieldType::String->value,
+            default => throw new Exception(),
+        };
     }
 }

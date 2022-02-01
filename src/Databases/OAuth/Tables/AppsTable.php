@@ -1,64 +1,44 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables;
 
-use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractMySqlTable;
-use CarloNicora\Minimalism\Services\MySQL\Interfaces\FieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlFieldInterface;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
 use Exception;
 
-class AppsTable extends AbstractMySqlTable
+enum AppsTable: string implements SqlTableInterface, SqlFieldInterface
 {
-    /** @var string */
-    protected static string $tableName = 'apps';
+    use SqlTableTrait;
+    use SqlFieldTrait;
 
-    /** @var array  */
-    protected static array $fields = [
-        'appId'         => FieldInterface::INTEGER
-                        +  FieldInterface::PRIMARY_KEY
-                        +  FieldInterface::AUTO_INCREMENT,
-        'userId'        => FieldInterface::INTEGER,
-        'name'          => FieldInterface::STRING,
-        'url'           => FieldInterface::STRING,
-        'isActive'      => FieldInterface::INTEGER,
-        'isTrusted'     => FieldInterface::INTEGER,
-        'clientId'      => FieldInterface::STRING,
-        'clientSecret'  => FieldInterface::STRING,
-        'creationTime'  => FieldInterface::STRING
-                        +  FieldInterface::TIME_CREATE
-    ];
+    case tableName='apps';
+
+    case appId='appId';
+    case userId='userId';
+    case name='name';
+    case url='url';
+    case isActive='isActive';
+    case isTrusted='isTrusted';
+    case clientId='clientId';
+    case clientSecret='clientSecret';
+    case creationTime='creationTime';
 
     /**
-     * @param string $client_id
-     * @return array
+     * @return int
      * @throws Exception
      */
-    public function readByClientId(
-        string $client_id,
-    ): array
+    public function getFieldDefinition(
+    ): int
     {
-        $this->sql = 'SELECT *'
-            . ' FROM ' . self::getTableName()
-            . ' WHERE clientId=?;';
-        $this->parameters = ['s', $client_id];
-
-        return $this->functions->runRead();
-    }
-
-    /**
-     * @param string $token
-     * @return array
-     * @throws Exception
-     */
-    public function readByToken(
-        string $token,
-    ): array
-    {
-        $this->sql = 'SELECT ' . self::getTableName() . '.*'
-            . ' FROM ' . self::getTableName()
-            . ' JOIN ' . TokensTable::getTableName()
-            . ' ON ' . self::getTableName() . '.appId=' . TokensTable::getTableName() . '.appId'
-            . ' WHERE ' . TokensTable::getTableName() . '.token=?;';
-        $this->parameters = ['s', $token];
-
-        return $this->functions->runRead();
+        return match($this) {
+            self::appId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
+            self::userId,self::isActive,self::isTrusted => FieldType::Integer->value,
+            self::name,self::url,self::clientId,self::clientSecret => FieldType::String->value,
+            self::creationTime => FieldType::String->value + FieldOption::TimeCreate->value,
+            default => throw new Exception(),
+        };
     }
 }
