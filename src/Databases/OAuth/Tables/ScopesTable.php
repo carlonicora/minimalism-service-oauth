@@ -27,7 +27,7 @@ enum ScopesTable implements SqlTableInterface, SqlFieldInterface
     ): int
     {
         return match($this) {
-            self::scopeId => FieldOption::AutoIncrement->value,
+            self::scopeId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
             self::name => FieldType::String->value,
         };
     }

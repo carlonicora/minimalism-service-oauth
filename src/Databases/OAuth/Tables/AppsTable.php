@@ -34,10 +34,10 @@ enum AppsTable implements SqlTableInterface, SqlFieldInterface
     ): int
     {
         return match($this) {
-            self::appId => FieldOption::AutoIncrement->value,
+            self::appId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
             self::userId,self::isActive,self::isTrusted => FieldType::Integer->value,
             self::name,self::url,self::clientId,self::clientSecret => FieldType::String->value,
-            self::creationTime => FieldOption::TimeCreate->value,
+            self::creationTime => FieldType::String->value + FieldOption::TimeCreate->value,
         };
     }
 }

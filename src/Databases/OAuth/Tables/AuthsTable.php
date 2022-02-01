@@ -30,7 +30,7 @@ enum AuthsTable implements SqlTableInterface, SqlFieldInterface
     ): int
     {
         return match($this) {
-            self::authId => FieldOption::AutoIncrement->value,
+            self::authId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
             self::userId,self::appId => FieldType::Integer->value,
             self::expiration,self::code => FieldType::String->value,
         };

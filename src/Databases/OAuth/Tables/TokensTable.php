@@ -30,7 +30,7 @@ enum TokensTable implements SqlTableInterface, SqlFieldInterface
     ): int
     {
         return match($this) {
-            self::tokenId => FieldOption::AutoIncrement->value,
+            self::tokenId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
             self::userId,self::appId,self::isUser => FieldType::Integer->value,
             self::token => FieldType::String->value,
         };
