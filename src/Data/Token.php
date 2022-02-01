@@ -27,12 +27,12 @@ class Token extends AbstractSqlDataObject
     private string $token;
 
     /**
-     * @param ObjectFactory $objectFactory
+     * @param ObjectFactory|null $objectFactory
      * @param array|null $data
      * @throws Exception
      */
     public function __construct(
-        ObjectFactory $objectFactory,
+        ?ObjectFactory $objectFactory=null,
         ?array $data = null,
     )
     {

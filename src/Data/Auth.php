@@ -26,12 +26,12 @@ class Auth extends AbstractSqlDataObject
     private string $code;
 
     /**
-     * @param ObjectFactory $objectFactory
+     * @param ObjectFactory|null $objectFactory
      * @param array|null $data
      * @throws Exception
      */
     public function __construct(
-        ObjectFactory $objectFactory,
+        ?ObjectFactory $objectFactory=null,
         ?array $data = null,
     )
     {
@@ -156,5 +156,15 @@ class Auth extends AbstractSqlDataObject
     ): string
     {
         return $this->code;
+    }
+
+    /**
+     * @param int $authId
+     */
+    public function setAuthId(
+        int $authId
+    ): void
+    {
+        $this->authId = $authId;
     }
 }

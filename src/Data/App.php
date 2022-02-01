@@ -138,4 +138,84 @@ class App extends AbstractSqlDataObject implements ApplicationInterface
     {
         return $this->name;
     }
+
+    /**
+     * @param int $appId
+     */
+    public function setAppId(
+        int $appId,
+    ): void
+    {
+        $this->appId = $appId;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(
+        string $name,
+    ): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(
+        string $url,
+    ): void
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @param string $clientId
+     */
+    public function setClientId(
+        string $clientId,
+    ): void
+    {
+        $this->clientId = $clientId;
+    }
+
+    /**
+     * @param string|null $clientSecret
+     */
+    public function setClientSecret(
+        ?string $clientSecret,
+    ): void
+    {
+        $this->clientSecret = $clientSecret;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive(
+        bool $isActive,
+    ): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @param bool $isTrusted
+     */
+    public function setIsTrusted(
+        bool $isTrusted,
+    ): void
+    {
+        $this->isTrusted = $isTrusted;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId(
+        int $userId,
+    ): void
+    {
+        $this->userId = $userId;
+    }
 }
