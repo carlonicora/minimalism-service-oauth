@@ -31,11 +31,9 @@ class AppIO extends AbstractSqlIO
             )
             ->addParameter(TokensTable::token, $token);
 
-        return $this->returnSingleObject(
-            recordset: $this->data->read(
-                factory: $factory,
-            ),
-            objectType: App::class,
+        return $this->data->read(
+            factory: $factory,
+            singleReturnedObjectInterfaceName: App::class,
         );
     }
 
@@ -52,11 +50,9 @@ class AppIO extends AbstractSqlIO
             ->selectAll(AppsTable::tableName)
             ->addParameter(AppsTable::clientId, $clientId);
 
-        return $this->returnSingleObject(
-            recordset: $this->data->read(
-                factory: $factory
-            ),
-            objectType: App::class,
+        return $this->data->read(
+            factory: $factory,
+            singleReturnedObjectInterfaceName: App::class,
         );
     }
 }

@@ -22,11 +22,9 @@ class AuthIO extends AbstractSqlIO
             ->selectAll(AuthsTable::tableName)
             ->addParameter(AuthsTable::code, $code);
 
-        return $this->returnSingleObject(
-            recordset: $this->data->read(
-                factory: $factory,
-            ),
-            objectType: Auth::class,
+        return $this->data->read(
+            factory: $factory,
+            singleReturnedObjectInterfaceName: Auth::class,
         );
     }
 
@@ -39,11 +37,9 @@ class AuthIO extends AbstractSqlIO
         Auth $auth,
     ): Auth
     {
-        return $this->returnSingleObject(
-            recordset: $this->data->create(
-                factory: $auth,
-            ),
-            objectType: Auth::class,
+        return $this->data->create(
+            factory: $auth,
+            returnedObjectInterfaceName: Auth::class,
         );
     }
 }

@@ -22,11 +22,9 @@ class TokenIO extends AbstractSqlIO
             ->selectAll(TokensTable::tableName)
             ->addParameter(TokensTable::token, $token);
 
-        return $this->returnSingleObject(
-            recordset: $this->data->read(
-                factory: $factory,
-            ),
-            objectType: Token::class,
+        return $this->data->read(
+            factory: $factory,
+            singleReturnedObjectInterfaceName: Token::class,
         );
     }
 
@@ -39,11 +37,9 @@ class TokenIO extends AbstractSqlIO
         Token $token,
     ): Token
     {
-        return $this->returnSingleObject(
-            recordset: $this->data->create(
-                factory: $token,
-            ),
-            objectType: Token::class,
+        return $this->data->create(
+            factory: $token,
+            returnedObjectInterfaceName: Token::class,
         );
     }
 }
