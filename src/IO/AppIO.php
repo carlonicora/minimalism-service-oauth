@@ -24,7 +24,6 @@ class AppIO extends AbstractSqlIO
             ->selectAll(AppsTable::tableName)
             ->addJoin(
                 new SqlJoinFactory(
-                    joinedTable: TokensTable::tableName,
                     primaryKey: AppsTable::appId,
                     foreignKey: TokensTable::appId,
                 ),

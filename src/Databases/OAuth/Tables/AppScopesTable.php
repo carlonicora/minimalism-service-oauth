@@ -9,15 +9,15 @@ use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
 use Exception;
 
-enum AppScopesTable: string implements SqlTableInterface, SqlFieldInterface
+enum AppScopesTable implements SqlTableInterface, SqlFieldInterface
 {
     use SqlTableTrait;
     use SqlFieldTrait;
 
-    case tableName='appScopes';
+    public const tableName='appScopes';
 
-    case appId='appId';
-    case scopeId='scopeId';
+    case appId;
+    case scopeId;
 
     /**
      * @return int
@@ -28,7 +28,6 @@ enum AppScopesTable: string implements SqlTableInterface, SqlFieldInterface
     {
         return match($this) {
             self::appId,self::scopeId => FieldType::Integer->value + FieldOption::PrimaryKey->value,
-            default => throw new Exception(),
         };
     }
 }

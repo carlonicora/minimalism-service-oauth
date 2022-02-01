@@ -9,18 +9,18 @@ use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
 use Exception;
 
-enum AuthsTable: string implements SqlTableInterface, SqlFieldInterface
+enum AuthsTable implements SqlTableInterface, SqlFieldInterface
 {
     use SqlTableTrait;
     use SqlFieldTrait;
 
-    case tableName='auths';
+    public const tableName='auths';
 
-    case authId='authId';
-    case appId='appId';
-    case userId='userId';
-    case expiration='expiration';
-    case code='code';
+    case authId;
+    case appId;
+    case userId;
+    case expiration;
+    case code;
 
     /**
      * @return int
@@ -30,10 +30,9 @@ enum AuthsTable: string implements SqlTableInterface, SqlFieldInterface
     ): int
     {
         return match($this) {
-            self::authId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
+            self::authId => FieldOption::AutoIncrement->value,
             self::userId,self::appId => FieldType::Integer->value,
             self::expiration,self::code => FieldType::String->value,
-            default => throw new Exception(),
         };
     }
 }

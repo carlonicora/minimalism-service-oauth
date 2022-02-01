@@ -4,7 +4,6 @@ namespace CarloNicora\Minimalism\Services\OAuth\Data;
 use CarloNicora\JsonApi\Objects\ResourceObject;
 use CarloNicora\Minimalism\Factories\ObjectFactory;
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlDataObject;
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
 
@@ -43,12 +42,12 @@ class Auth extends AbstractSqlDataObject
     }
 
     /**
-     * @return SqlTableInterface
+     * @return string
      */
-    public function getTable(
-    ): SqlTableInterface
+    public function getTableClass(
+    ): string
     {
-        return AuthsTable::tableName;
+        return AuthsTable::class;
     }
 
     /**
