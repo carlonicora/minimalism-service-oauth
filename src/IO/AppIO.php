@@ -20,8 +20,8 @@ class AppIO extends AbstractSqlIO
         string $token,
     ): App
     {
-        $factory = SqlFactory::create()
-            ->selectAll(AppsTable::tableName)
+        $factory = SqlFactory::create(AppsTable::class)
+            ->selectAll()
             ->addJoin(
                 new SqlJoinFactory(
                     primaryKey: AppsTable::appId,
@@ -45,8 +45,8 @@ class AppIO extends AbstractSqlIO
         string $clientId,
     ): App
     {
-        $factory = SqlFactory::create()
-            ->selectAll(AppsTable::tableName)
+        $factory = SqlFactory::create(AppsTable::class)
+            ->selectAll()
             ->addParameter(AppsTable::clientId, $clientId);
 
         return $this->data->read(

@@ -18,8 +18,8 @@ class TokenIO extends AbstractSqlIO
         string $token,
     ): Token
     {
-        $factory = SqlFactory::create()
-            ->selectAll(TokensTable::tableName)
+        $factory = SqlFactory::create(TokensTable::class)
+            ->selectAll()
             ->addParameter(TokensTable::token, $token);
 
         return $this->data->read(

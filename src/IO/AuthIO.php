@@ -18,8 +18,8 @@ class AuthIO extends AbstractSqlIO
         string $code,
     ): Auth
     {
-        $factory = SqlFactory::create()
-            ->selectAll(AuthsTable::tableName)
+        $factory = SqlFactory::create(AuthsTable::class)
+            ->selectAll()
             ->addParameter(AuthsTable::code, $code);
 
         return $this->data->read(
