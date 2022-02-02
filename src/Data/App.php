@@ -1,110 +1,55 @@
 <?php
+/** @noinspection PhpUnusedPrivateFieldInspection */
+/** @noinspection SenselessPropertyInspection */
+/** @noinspection PhpPropertyOnlyWrittenInspection */
+
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
-use CarloNicora\JsonApi\Objects\ResourceObject;
-use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
-use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlDataObject;
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlTableFactory;
+use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
+use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
+use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
+use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractSqlDataObject;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
 
+#[DbTable(tableClass: AppsTable::class)]
 class App extends AbstractSqlDataObject implements ApplicationInterface
 {
     /** @var int  */
+    #[DbField]
     private int $appId;
 
     /** @var int  */
+    #[DbField]
     private int $userId;
 
     /** @var string  */
+    #[DbField]
     private string $name;
 
     /** @var string  */
+    #[DbField]
     private string $url;
 
     /** @var bool  */
+    #[DbField]
     private bool $isActive;
 
     /** @var bool  */
+    #[DbField]
     private bool $isTrusted;
 
     /** @var string  */
+    #[DbField]
     private string $clientId;
 
     /** @var string|null  */
+    #[DbField]
     private ?string $clientSecret=null;
 
     /** @var int  */
+    #[DbField(fieldType: DbFieldType::IntDateTime)]
     private int $creationTime;
-
-    /**
-     * @param array $data
-     * @return void
-     */
-    public function import(
-        array $data,
-    ): void
-    {
-        $this->appId = $data['appId'];
-        $this->userId = $data['userId'];
-        $this->name = $data['name'];
-        $this->url = $data['url'];
-        $this->isActive = $data['isActive'];
-        $this->isTrusted = $data['isTrusted'];
-        $this->clientId = $data['clientId'];
-        $this->clientSecret = $data['clientSecret'];
-        $this->creationTime = strtotime($data['creationTime']);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTableClass(
-    ): string
-    {
-        return AppsTable::class;
-    }
-
-    /**
-     * @return SqlTableInterface
-     * @throws MinimalismException
-     */
-    public function getTable(
-    ): SqlTableInterface
-    {
-        return SqlTableFactory::create(AppsTable::class);
-    }
-
-    /**
-     * @return array
-     */
-    public function export(
-    ): array
-    {
-        $response = parent::export();
-
-        $response['appId'] = $this->appId ?? null;
-        $response['userId'] = $this->userId;
-        $response['name'] = $this->name;
-        $response['url'] = $this->url;
-        $response['isActive'] = $this->isActive;
-        $response['isTrusted'] = $this->isTrusted;
-        $response['clientId'] = $this->clientId;
-        $response['clientSecret'] = $this->clientSecret;
-        $response['creationTime'] = date('Y-m-d H:i:s', $this->creationTime ?? time());
-
-        return $response;
-    }
-
-    /**
-     * @return ResourceObject
-     */
-    public function generateResource(
-    ): ResourceObject
-    {
-        return new ResourceObject();
-    }
 
     /**
      * @return string

@@ -41,7 +41,7 @@ class Token extends AbstractModel
             'token_type' => 'bearer'
         ];
 
-        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\Token($this->objectFactory);
+        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\Token();
 
         if ($grantType === GrantType::AuthorizationCode) {
             $auth = $this->objectFactory->create(AuthIO::class)->readByCode($payload['code']);

@@ -143,7 +143,7 @@ class OAuth extends AbstractService implements SecurityInterface
     {
         $app = $this->objectFactory->create(AppIO::class)->readByClientId($clientId);
 
-        $auth = new Auth($this->objectFactory);
+        $auth = new Auth();
         $auth->setAppId($app->getId());
         $auth->setUserId($userId);
         $auth->setExpirationSeconds(30);
