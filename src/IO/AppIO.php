@@ -32,7 +32,7 @@ class AppIO extends AbstractSqlIO
 
         return $this->data->read(
             factory: $factory,
-            singleReturnedObjectInterfaceName: App::class,
+            sqlObjectInterfaceClass: App::class,
         );
     }
 
@@ -51,7 +51,7 @@ class AppIO extends AbstractSqlIO
 
         return $this->data->read(
             factory: $factory,
-            singleReturnedObjectInterfaceName: App::class,
+            sqlObjectInterfaceClass: App::class,
         );
     }
 }

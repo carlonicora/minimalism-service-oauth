@@ -24,7 +24,7 @@ class AuthIO extends AbstractSqlIO
 
         return $this->data->read(
             factory: $factory,
-            singleReturnedObjectInterfaceName: Auth::class,
+            sqlObjectInterfaceClass: Auth::class,
         );
     }
 
@@ -39,7 +39,7 @@ class AuthIO extends AbstractSqlIO
     {
         return $this->data->create(
             factory: $auth,
-            singleReturnedObjectInterfaceName: Auth::class,
+            sqlObjectInterfaceClass: Auth::class,
         );
     }
 }

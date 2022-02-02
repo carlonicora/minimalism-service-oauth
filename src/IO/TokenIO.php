@@ -24,7 +24,7 @@ class TokenIO extends AbstractSqlIO
 
         return $this->data->read(
             factory: $factory,
-            singleReturnedObjectInterfaceName: Token::class,
+            sqlObjectInterfaceClass: Token::class,
         );
     }
 
@@ -39,7 +39,7 @@ class TokenIO extends AbstractSqlIO
     {
         return $this->data->create(
             factory: $token,
-            singleReturnedObjectInterfaceName: Token::class,
+            sqlObjectInterfaceClass: Token::class,
         );
     }
 }
