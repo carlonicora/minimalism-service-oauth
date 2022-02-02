@@ -9,12 +9,15 @@ use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
-use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractSqlDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
 
 #[DbTable(tableClass: AppsTable::class)]
-class App extends AbstractSqlDataObject implements ApplicationInterface
+class App  implements SqlDataObjectInterface, ApplicationInterface
 {
+    use SqlDataObjectTrait;
+
     /** @var int  */
     #[DbField]
     private int $appId;

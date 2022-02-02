@@ -7,13 +7,16 @@ namespace CarloNicora\Minimalism\Services\OAuth\Data;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
-use CarloNicora\Minimalism\Services\MySQL\Abstracts\AbstractSqlDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
+use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
 
 #[DbTable(tableClass: AuthsTable::class)]
-class Auth extends AbstractSqlDataObject
+class Auth implements SqlDataObjectInterface
 {
+    use SqlDataObjectTrait;
+
     /** @var int  */
     #[DbField]
     private int $authId;
