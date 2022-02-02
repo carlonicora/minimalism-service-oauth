@@ -1,43 +1,42 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables;
 
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlFieldInterface;
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlField;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlTable;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
-use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
-use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
-use Exception;
 
-enum AppsTable implements SqlTableInterface, SqlFieldInterface
+#[SqlTable(name: 'apps',databaseIdentifier: 'OAuth')]
+enum AppsTable
 {
-    use SqlTableTrait;
-    use SqlFieldTrait;
-
     public const tableName='apps';
 
+    #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
     case appId;
+
+    #[SqlField(fieldType: FieldType::Integer)]
     case userId;
+
+    #[SqlField(fieldType: FieldType::String)]
     case name;
+
+    #[SqlField(fieldType: FieldType::String)]
     case url;
+
+    #[SqlField(fieldType: FieldType::Integer)]
     case isActive;
+
+    #[SqlField(fieldType: FieldType::Integer)]
     case isTrusted;
+
+    #[SqlField(fieldType: FieldType::String)]
     case clientId;
+
+
+    #[SqlField(fieldType: FieldType::String)]
     case clientSecret;
+
+    #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
     case creationTime;
 
-    /**
-     * @return int
-     * @throws Exception
-     */
-    public function getFieldDefinition(
-    ): int
-    {
-        return match($this) {
-            self::appId => FieldType::Integer->value + FieldOption::AutoIncrement->value,
-            self::userId,self::isActive,self::isTrusted => FieldType::Integer->value,
-            self::name,self::url,self::clientId,self::clientSecret => FieldType::String->value,
-            self::creationTime => FieldType::String->value + FieldOption::TimeCreate->value,
-        };
-    }
 }

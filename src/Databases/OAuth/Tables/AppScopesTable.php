@@ -1,33 +1,18 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables;
 
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlFieldInterface;
-use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlField;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlTable;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
-use CarloNicora\Minimalism\Services\MySQL\Traits\SqlFieldTrait;
-use CarloNicora\Minimalism\Services\MySQL\Traits\SqlTableTrait;
-use Exception;
 
-enum AppScopesTable implements SqlTableInterface, SqlFieldInterface
+#[SqlTable(name: 'appScopes',databaseIdentifier: 'OAuth')]
+enum AppScopesTable
 {
-    use SqlTableTrait;
-    use SqlFieldTrait;
-
-    public const tableName='appScopes';
-
+    #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::PrimaryKey)]
     case appId;
+
+    #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::PrimaryKey)]
     case scopeId;
 
-    /**
-     * @return int
-     * @throws Exception
-     */
-    public function getFieldDefinition(
-    ): int
-    {
-        return match($this) {
-            self::appId,self::scopeId => FieldType::Integer->value + FieldOption::PrimaryKey->value,
-        };
-    }
 }

@@ -2,8 +2,11 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data;
 
 use CarloNicora\JsonApi\Objects\ResourceObject;
+use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlDataObject;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlTableInterface;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlTableFactory;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
 
 class App extends AbstractSqlDataObject implements ApplicationInterface
@@ -61,6 +64,16 @@ class App extends AbstractSqlDataObject implements ApplicationInterface
     ): string
     {
         return AppsTable::class;
+    }
+
+    /**
+     * @return SqlTableInterface
+     * @throws MinimalismException
+     */
+    public function getTable(
+    ): SqlTableInterface
+    {
+        return SqlTableFactory::create(AppsTable::class);
     }
 
     /**
