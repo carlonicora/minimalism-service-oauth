@@ -23,12 +23,12 @@ class Auth extends AbstractDataObject
     private string $code;
 
     /**
-     * @param ObjectFactory $objectFactory
+     * @param ObjectFactory|null $objectFactory
      * @param array|null $data
      * @throws Exception
      */
     public function __construct(
-        ObjectFactory $objectFactory,
+        ?ObjectFactory $objectFactory=null,
         ?array $data = null,
     )
     {
