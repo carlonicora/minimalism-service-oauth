@@ -3,6 +3,7 @@ namespace CarloNicora\Minimalism\Services\OAuth;
 
 use CarloNicora\Minimalism\Abstracts\AbstractService;
 use CarloNicora\Minimalism\Enums\HttpCode;
+use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
@@ -12,7 +13,6 @@ use CarloNicora\Minimalism\Services\OAuth\IO\AppIO;
 use CarloNicora\Minimalism\Services\OAuth\IO\AuthIO;
 use CarloNicora\Minimalism\Services\OAuth\IO\TokenIO;
 use Exception;
-use RuntimeException;
 
 class OAuth extends AbstractService implements SecurityInterface
 {
@@ -90,6 +90,7 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @param ServiceFactory $services
      * @return void
+     * @throws MinimalismException
      */
     public function postIntialise(
         ServiceFactory $services,
@@ -116,6 +117,7 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @param string $token
      * @return void
+     * @throws MinimalismException
      */
     public function loadToken(
         string $token,
@@ -124,7 +126,7 @@ class OAuth extends AbstractService implements SecurityInterface
         try {
             $this->token = $this->objectFactory->create(TokenIO::class)->readByToken($token);
         } catch (Exception) {
-            throw new RuntimeException('Authorization token not found', HttpCode::Unauthorized->value);
+            throw new MinimalismException(status: HttpCode::Unauthorized, message: 'Authorization token not found');
         }
     }
 
