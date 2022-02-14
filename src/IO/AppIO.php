@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\MySQL\Factories\SqlJoinFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\App;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
@@ -20,7 +20,7 @@ class AppIO extends AbstractSqlIO
         string $token,
     ): App
     {
-        $factory = SqlFactory::create(AppsTable::class)
+        $factory = SqlQueryFactory::create(AppsTable::class)
             ->selectAll()
             ->addJoin(
                 new SqlJoinFactory(
@@ -31,8 +31,8 @@ class AppIO extends AbstractSqlIO
             ->addParameter(TokensTable::token, $token);
 
         return $this->data->read(
-            factory: $factory,
-            sqlObjectInterfaceClass: App::class,
+            queryFactory: $factory,
+            responseType: App::class,
         );
     }
 
@@ -45,13 +45,13 @@ class AppIO extends AbstractSqlIO
         string $clientId,
     ): App
     {
-        $factory = SqlFactory::create(AppsTable::class)
+        $factory = SqlQueryFactory::create(AppsTable::class)
             ->selectAll()
             ->addParameter(AppsTable::clientId, $clientId);
 
         return $this->data->read(
-            factory: $factory,
-            sqlObjectInterfaceClass: App::class,
+            queryFactory: $factory,
+            responseType: App::class,
         );
     }
 }

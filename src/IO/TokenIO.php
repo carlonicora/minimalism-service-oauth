@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Token;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\TokensTable;
 use Exception;
@@ -18,13 +18,13 @@ class TokenIO extends AbstractSqlIO
         string $token,
     ): Token
     {
-        $factory = SqlFactory::create(TokensTable::class)
+        $factory = SqlQueryFactory::create(TokensTable::class)
             ->selectAll()
             ->addParameter(TokensTable::token, $token);
 
         return $this->data->read(
-            factory: $factory,
-            sqlObjectInterfaceClass: Token::class,
+            queryFactory: $factory,
+            responseType: Token::class,
         );
     }
 
@@ -38,8 +38,8 @@ class TokenIO extends AbstractSqlIO
     ): Token
     {
         return $this->data->create(
-            factory: $token,
-            sqlObjectInterfaceClass: Token::class,
+            queryFactory: $token,
+            responseType: Token::class,
         );
     }
 }

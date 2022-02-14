@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlFactory;
+use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
 use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
 use Exception;
@@ -18,13 +18,13 @@ class AuthIO extends AbstractSqlIO
         string $code,
     ): Auth
     {
-        $factory = SqlFactory::create(AuthsTable::class)
+        $factory = SqlQueryFactory::create(AuthsTable::class)
             ->selectAll()
             ->addParameter(AuthsTable::code, $code);
 
         return $this->data->read(
-            factory: $factory,
-            sqlObjectInterfaceClass: Auth::class,
+            queryFactory: $factory,
+            responseType: Auth::class,
         );
     }
 
@@ -38,8 +38,8 @@ class AuthIO extends AbstractSqlIO
     ): Auth
     {
         return $this->data->create(
-            factory: $auth,
-            sqlObjectInterfaceClass: Auth::class,
+            queryFactory: $auth,
+            responseType: Auth::class,
         );
     }
 }
