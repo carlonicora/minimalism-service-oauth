@@ -132,7 +132,7 @@ class OAuth extends AbstractService implements SecurityInterface
 
     /**
      * @param string $clientId
-     * @param int $userId
+     * @param int|null $userId
      * @param string $state
      * @return string
      * @throws Exception
