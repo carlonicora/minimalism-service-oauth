@@ -139,23 +139,28 @@ class OAuth extends AbstractService implements SecurityInterface
      */
     public function generateRedirection(
         string $clientId,
-        int $userId,
+        ?int $userId=null,
         string $state='',
     ): string
     {
         $app = $this->objectFactory->create(AppIO::class)->readByClientId($clientId);
 
-        $auth = new Auth();
-        $auth->setAppId($app->getId());
-        $auth->setUserId($userId);
-        $auth->setExpirationSeconds(30);
-        $auth = $this->objectFactory->create(AuthIO::class)->insert($auth);
-
         $response = $app->getUrl();
 
-        $response .= str_contains($response, '?') ? '&' : '?'
-            . 'code=' . $auth->getCode()
-            . '&state=' . $state;
+        if ($userId !== null) {
+            $auth = new Auth();
+            $auth->setAppId($app->getId());
+            $auth->setUserId($userId);
+            $auth->setExpirationSeconds(30);
+            $auth = $this->objectFactory->create(AuthIO::class)->insert($auth);
+
+            $response .= str_contains($response, '?') ? '&' : '?'
+                . 'code=' . $auth->getCode()
+                . '&state=' . $state;
+        } else {
+            $response .= str_contains($response, '?') ? '&' : '?'
+                . 'state=' . $state;
+        }
 
         return $response;
     }
