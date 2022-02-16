@@ -133,16 +133,20 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @param string $clientId
      * @param int|null $userId
-     * @param string $state
+     * @param string|null $state
      * @return string
      * @throws Exception
      */
     public function generateRedirection(
         string $clientId,
         ?int $userId=null,
-        string $state='',
+        ?string $state=null,
     ): string
     {
+        if ($state === null){
+            $state = '';
+        }
+
         $app = $this->objectFactory->create(AppIO::class)->readByClientId($clientId);
 
         $response = $app->getUrl();
