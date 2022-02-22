@@ -96,22 +96,24 @@ class OAuth extends AbstractService implements SecurityInterface
         ServiceFactory $services,
     ): void
     {
-        if ($this->headers === null) {
-            $this->headers = getallheaders();
+        if ($this->token !== null) {
+            if ($this->headers === null) {
+                $this->headers = getallheaders();
+            }
+
+            $bearer = $this->headers['Authorization'] ?? null;
+            if ($bearer === null) {
+                return;
+            }
+
+            [, $token] = explode(' ', $bearer);
+
+            if (empty($token)) {
+                return;
+            }
+
+            $this->loadToken($token);
         }
-
-        $bearer = $this->headers['Authorization'] ?? null;
-        if ($bearer === null){
-            return;
-        }
-
-        [,$token] = explode(' ', $bearer);
-
-        if (empty($token)) {
-            return;
-        }
-
-        $this->loadToken($token);
     }
 
     /**
