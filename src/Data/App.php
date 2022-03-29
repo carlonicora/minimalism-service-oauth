@@ -30,8 +30,8 @@ class App extends AbstractDataObject implements ApplicationInterface
     /** @var string|null  */
     private ?string $clientSecret=null;
 
-    /** @var int  */
-    private int $creationTime;
+    /** @var int|null */
+    private ?int $creationTime=null;
 
     /**
      * @param array $data
@@ -49,7 +49,7 @@ class App extends AbstractDataObject implements ApplicationInterface
         $this->isTrusted = $data['isTrusted'];
         $this->clientId = $data['clientId'];
         $this->clientSecret = $data['clientSecret'];
-        $this->creationTime = strtotime($data['creationTime']);
+        $this->creationTime = $data['creationTime'] ? strtotime($data['creationTime']) : null;
     }
 
     /**
