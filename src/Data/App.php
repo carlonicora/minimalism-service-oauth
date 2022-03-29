@@ -50,9 +50,9 @@ class App  implements SqlDataObjectInterface, ApplicationInterface
     #[DbField]
     private ?string $clientSecret=null;
 
-    /** @var int  */
+    /** @var int|null  */
     #[DbField(fieldType: DbFieldType::IntDateTime)]
-    private int $creationTime;
+    private ?int $creationTime=null;
 
     /**
      * @return string
