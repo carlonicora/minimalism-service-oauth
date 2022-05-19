@@ -1,5 +1,5 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\Enums;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases;
 
 enum AppReliability: int
 {

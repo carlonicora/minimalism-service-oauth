@@ -3,7 +3,7 @@
 /** @noinspection SenselessPropertyInspection */
 /** @noinspection PhpPropertyOnlyWrittenInspection */
 
-namespace CarloNicora\Minimalism\Services\OAuth\Data;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
@@ -11,7 +11,7 @@ use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
-use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AppsTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\AppsTable;
 
 #[DbTable(tableClass: AppsTable::class)]
 class App  implements SqlDataObjectInterface, ApplicationInterface

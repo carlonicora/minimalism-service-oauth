@@ -1,10 +1,10 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\IO;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
 use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
-use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
-use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\AuthsTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\AuthsTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Auth;
 use Exception;
 
 class AuthIO extends AbstractSqlIO

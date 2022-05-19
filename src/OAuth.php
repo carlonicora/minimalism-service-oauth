@@ -7,11 +7,11 @@ use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
-use CarloNicora\Minimalism\Services\OAuth\Data\Auth;
-use CarloNicora\Minimalism\Services\OAuth\Data\Token;
-use CarloNicora\Minimalism\Services\OAuth\IO\AppIO;
-use CarloNicora\Minimalism\Services\OAuth\IO\AuthIO;
-use CarloNicora\Minimalism\Services\OAuth\IO\TokenIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Auth;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Token;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AppIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AuthIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\TokenIO;
 use Exception;
 
 class OAuth extends AbstractService implements SecurityInterface
@@ -26,7 +26,7 @@ class OAuth extends AbstractService implements SecurityInterface
      * @param bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN
      */
     public function __construct(
-        private bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN=false,
+        private readonly bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN=false,
     )
     {
     }

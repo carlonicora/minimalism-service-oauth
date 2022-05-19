@@ -1,10 +1,10 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\IO;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
 use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
-use CarloNicora\Minimalism\Services\OAuth\Data\Token;
-use CarloNicora\Minimalism\Services\OAuth\Databases\OAuth\Tables\TokensTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\TokensTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Token;
 use Exception;
 
 class TokenIO extends AbstractSqlIO
