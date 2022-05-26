@@ -1,5 +1,6 @@
 <?php
 /** @noinspection SenselessPropertyInspection */
+
 /** @noinspection PhpPropertyOnlyWrittenInspection */
 
 namespace CarloNicora\Minimalism\Services\OAuth\Data\Auths\DataObjects;
@@ -8,6 +9,9 @@ use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlField;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auths\Databases\AuthsTable;
 use Exception;
@@ -17,31 +21,30 @@ class Auth implements SqlDataObjectInterface
 {
     use SqlDataObjectTrait;
 
-    /** @var int  */
-    #[DbField]
+    /** @var int */
+    #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
     private int $authId;
 
-    /** @var int  */
-    #[DbField]
+    /** @var int */
+    #[SqlField(fieldType: FieldType::Integer)]
     private int $appId;
 
-    /** @var int  */
-    #[DbField]
+    /** @var int */
+    #[SqlField(fieldType: FieldType::Integer)]
     private int $userId;
 
-    /** @var int  */
+    /** @var int */
     #[DbField(fieldType: DbFieldType::IntDateTime)]
     private int $expiration;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $code;
 
     /**
      * @throws Exception
      */
-    public function __construct(
-    )
+    public function __construct()
     {
         $this->code = bin2hex(random_bytes(32));
     }
@@ -49,8 +52,7 @@ class Auth implements SqlDataObjectInterface
     /**
      * @return bool
      */
-    public function isExpired(
-    ): bool
+    public function isExpired(): bool
     {
         return $this->expiration < time();
     }
@@ -58,8 +60,7 @@ class Auth implements SqlDataObjectInterface
     /**
      * @return int
      */
-    public function getAppId(
-    ): int
+    public function getAppId(): int
     {
         return $this->appId;
     }
@@ -67,10 +68,25 @@ class Auth implements SqlDataObjectInterface
     /**
      * @return int
      */
-    public function getUserId(
-    ): int
+    public function getUserId(): int
     {
         return $this->userId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpiration(): int
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
     }
 
     /**
@@ -104,15 +120,6 @@ class Auth implements SqlDataObjectInterface
     }
 
     /**
-     * @return string
-     */
-    public function getCode(
-    ): string
-    {
-        return $this->code;
-    }
-
-    /**
      * @param int $authId
      */
     public function setAuthId(
@@ -121,4 +128,16 @@ class Auth implements SqlDataObjectInterface
     {
         $this->authId = $authId;
     }
+
+    /**
+     * @param string $code
+     * @return void
+     */
+    public function setCode(
+        string $code
+    ): void
+    {
+        $this->code = $code;
+    }
+
 }

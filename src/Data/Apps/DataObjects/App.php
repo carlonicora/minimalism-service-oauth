@@ -14,168 +14,190 @@ use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Data\Apps\Databases\AppsTable;
 
 #[DbTable(tableClass: AppsTable::class)]
-class App  implements SqlDataObjectInterface, ApplicationInterface
+class App implements SqlDataObjectInterface, ApplicationInterface
 {
     use SqlDataObjectTrait;
 
-    /** @var int  */
-    #[DbField]
-    private int $appId;
+    /** @var int */
+    #[DbField(field: AppsTable::appId)]
+    private int $id;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $userId;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $name;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $url;
 
-    /** @var bool  */
+    /** @var bool */
     #[DbField]
-    private bool $isActive;
+    private bool $isActive = false;
 
-    /** @var bool  */
+    /** @var bool */
     #[DbField]
-    private bool $isTrusted;
+    private bool $isTrusted = false;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $clientId;
 
-    /** @var string|null  */
-    #[DbField]
-    private ?string $clientSecret=null;
-
-    /** @var int|null  */
+    /** @var int */
     #[DbField(fieldType: DbFieldType::IntDateTime)]
-    private ?int $creationTime=null;
+    private int $createdAt;
+
+    /** @var string|null */
+    #[DbField]
+    private ?string $clientSecret = null;
 
     /**
-     * @return string
+     * @return int
      */
-    public function getUrl(
-    ): string
+    public function getId(): int
     {
-        return $this->url;
+        return $this->id;
     }
 
     /**
-     * @return bool
+     * @param int $id
      */
-    public function isActive(
-    ): bool
+    public function setId(int $id): void
     {
-        return $this->isActive;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isTrusted(
-    ): bool
-    {
-        return $this->isTrusted;
+        $this->id = $id;
     }
 
     /**
      * @return int
      */
-    public function getId(
-    ): int
+    public function getUserId(): int
     {
-        return $this->appId;
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId(int $userId): void
+    {
+        $this->userId = $userId;
     }
 
     /**
      * @return string
      */
-    public function getName(
-    ): string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param int $appId
-     */
-    public function setAppId(
-        int $appId,
-    ): void
-    {
-        $this->appId = $appId;
-    }
-
-    /**
      * @param string $name
      */
-    public function setName(
-        string $name,
-    ): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
      * @param string $url
      */
-    public function setUrl(
-        string $url,
-    ): void
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
 
     /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTrusted(): bool
+    {
+        return $this->isTrusted;
+    }
+
+    /**
+     * @param bool $isTrusted
+     */
+    public function setIsTrusted(bool $isTrusted): void
+    {
+        $this->isTrusted = $isTrusted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    /**
      * @param string $clientId
      */
-    public function setClientId(
-        string $clientId,
-    ): void
+    public function setClientId(string $clientId): void
     {
         $this->clientId = $clientId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param int $createdAt
+     */
+    public function setCreatedAt(int $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getClientSecret(): ?string
+    {
+        return $this->clientSecret;
     }
 
     /**
      * @param string|null $clientSecret
      */
     public function setClientSecret(
-        ?string $clientSecret,
+        string $clientSecret = null
     ): void
     {
         $this->clientSecret = $clientSecret;
     }
 
-    /**
-     * @param bool $isActive
-     */
-    public function setIsActive(
-        bool $isActive,
-    ): void
-    {
-        $this->isActive = $isActive;
-    }
-
-    /**
-     * @param bool $isTrusted
-     */
-    public function setIsTrusted(
-        bool $isTrusted,
-    ): void
-    {
-        $this->isTrusted = $isTrusted;
-    }
-
-    /**
-     * @param int $userId
-     */
-    public function setUserId(
-        int $userId,
-    ): void
-    {
-        $this->userId = $userId;
-    }
 }

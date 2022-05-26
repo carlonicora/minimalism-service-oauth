@@ -6,11 +6,9 @@ use CarloNicora\Minimalism\Services\MySQL\Data\SqlTable;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
 
-#[SqlTable(name: 'apps',databaseIdentifier: 'OAuth')]
+#[SqlTable(name: 'apps', databaseIdentifier: 'OAuth')]
 enum AppsTable
 {
-    public const tableName='apps';
-
     #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
     case appId;
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\OAuth\Models;
 
 use CarloNicora\Minimalism\Abstracts\AbstractModel;
@@ -27,11 +28,11 @@ class Token extends AbstractModel
     {
         $grantType = GrantType::tryFrom(strtolower($payload['grant_type']));
 
-        if ($grantType !== GrantType::AuthorizationCode && $grantType !== GrantType::ClientCredentials){
+        if ($grantType !== GrantType::AuthorizationCode && $grantType !== GrantType::ClientCredentials) {
             throw new RuntimeException('grant_type not supported', HttpCode::BadRequest->value);
         }
 
-        if ($grantType === GrantType::ClientCredentials && !$OAuth->allowVisitorsToken()){
+        if ($grantType === GrantType::ClientCredentials && ! $OAuth->allowVisitorsToken()) {
             throw new RuntimeException('grant_type not supported', HttpCode::BadRequest->value);
         }
 
@@ -57,7 +58,7 @@ class Token extends AbstractModel
             $app = $this->objectFactory->create(AppIO::class)->readByClientId($payload['client_id']);
 
             $token->setAppId($app->getId());
-            $token->setUserId((int)(microtime(true)*1000));
+            $token->setUserId((int)(microtime(true) * 1000));
             $token->setIsUser(false);
         }
 

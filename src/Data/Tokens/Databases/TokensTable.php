@@ -6,7 +6,7 @@ use CarloNicora\Minimalism\Services\MySQL\Data\SqlTable;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
 
-#[SqlTable(name: 'tokens',databaseIdentifier: 'OAuth')]
+#[SqlTable(name: 'tokens', databaseIdentifier: 'OAuth')]
 enum TokensTable
 {
     #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
