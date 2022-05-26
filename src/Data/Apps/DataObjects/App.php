@@ -3,7 +3,7 @@
 /** @noinspection SenselessPropertyInspection */
 /** @noinspection PhpPropertyOnlyWrittenInspection */
 
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\Apps\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
@@ -11,54 +11,53 @@ use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\AppsTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\Databases\AppsTable;
 
 #[DbTable(tableClass: AppsTable::class)]
-class App  implements SqlDataObjectInterface, ApplicationInterface
+class App implements SqlDataObjectInterface, ApplicationInterface
 {
     use SqlDataObjectTrait;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $appId;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $userId;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $name;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $url;
 
-    /** @var bool  */
+    /** @var bool */
     #[DbField]
     private bool $isActive;
 
-    /** @var bool  */
+    /** @var bool */
     #[DbField]
     private bool $isTrusted;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $clientId;
 
-    /** @var string|null  */
+    /** @var string|null */
     #[DbField]
-    private ?string $clientSecret=null;
+    private ?string $clientSecret = null;
 
-    /** @var int|null  */
+    /** @var int|null */
     #[DbField(fieldType: DbFieldType::IntDateTime)]
-    private ?int $creationTime=null;
+    private ?int $creationTime = null;
 
     /**
      * @return string
      */
-    public function getUrl(
-    ): string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -66,8 +65,7 @@ class App  implements SqlDataObjectInterface, ApplicationInterface
     /**
      * @return bool
      */
-    public function isActive(
-    ): bool
+    public function isActive(): bool
     {
         return $this->isActive;
     }
@@ -75,8 +73,7 @@ class App  implements SqlDataObjectInterface, ApplicationInterface
     /**
      * @return bool
      */
-    public function isTrusted(
-    ): bool
+    public function isTrusted(): bool
     {
         return $this->isTrusted;
     }
@@ -84,8 +81,7 @@ class App  implements SqlDataObjectInterface, ApplicationInterface
     /**
      * @return int
      */
-    public function getId(
-    ): int
+    public function getId(): int
     {
         return $this->appId;
     }
@@ -93,8 +89,7 @@ class App  implements SqlDataObjectInterface, ApplicationInterface
     /**
      * @return string
      */
-    public function getName(
-    ): string
+    public function getName(): string
     {
         return $this->name;
     }

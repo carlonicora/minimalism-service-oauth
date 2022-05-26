@@ -3,13 +3,13 @@
 /** @noinspection SenselessPropertyInspection */
 /** @noinspection PhpPropertyOnlyWrittenInspection */
 
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\TokensTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\Databases\TokensTable;
 use Exception;
 
 #[DbTable(tableClass: TokensTable::class)]
@@ -17,31 +17,30 @@ class Token implements SqlDataObjectInterface
 {
     use SqlDataObjectTrait;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $tokenId;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $appId;
 
-    /** @var int  */
+    /** @var int */
     #[DbField]
     private int $userId;
 
-    /** @var bool  */
+    /** @var bool */
     #[DbField]
     private bool $isUser;
 
-    /** @var string  */
+    /** @var string */
     #[DbField]
     private string $token;
 
     /**
      * @throws Exception
      */
-    public function __construct(
-    )
+    public function __construct()
     {
         $this->token = bin2hex(random_bytes(32));
     }
@@ -89,8 +88,7 @@ class Token implements SqlDataObjectInterface
     /**
      * @return int
      */
-    public function getUserId(
-    ): int
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -98,8 +96,7 @@ class Token implements SqlDataObjectInterface
     /**
      * @return bool
      */
-    public function isUser(
-    ): bool
+    public function isUser(): bool
     {
         return $this->isUser;
     }
@@ -107,8 +104,7 @@ class Token implements SqlDataObjectInterface
     /**
      * @return string
      */
-    public function getToken(
-    ): string
+    public function getToken(): string
     {
         return $this->token;
     }

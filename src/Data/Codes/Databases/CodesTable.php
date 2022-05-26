@@ -1,26 +1,30 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases;
+
+namespace CarloNicora\Minimalism\Services\OAuth\Data\Codes\Databases;
 
 use CarloNicora\Minimalism\Services\MySQL\Data\SqlField;
 use CarloNicora\Minimalism\Services\MySQL\Data\SqlTable;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
 use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
 
-#[SqlTable(name: 'auths',databaseIdentifier: 'OAuth')]
-enum AuthsTable
+#[SqlTable(name: 'codes', databaseIdentifier: 'OAuth')]
+enum CodesTable
 {
     #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
-    case authId;
-
-    #[SqlField(fieldType: FieldType::Integer)]
-    case appId;
+    case codeId;
 
     #[SqlField(fieldType: FieldType::Integer)]
     case userId;
 
-    #[SqlField(fieldType: FieldType::String)]
-    case expiration;
-
-    #[SqlField(fieldType: FieldType::String)]
+    #[SqlField(fieldType: FieldType::Integer)]
     case code;
+
+    #[SqlField]
+    case type;
+
+    #[SqlField(fieldOption: FieldOption::TimeCreate)]
+    case createdAt;
+
+    #[SqlField(fieldOption: FieldType::Integer)]
+    case expirationTime;
 }

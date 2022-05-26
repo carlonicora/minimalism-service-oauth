@@ -1,4 +1,5 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\OAuth;
 
 use CarloNicora\Minimalism\Abstracts\AbstractService;
@@ -7,26 +8,26 @@ use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Auth;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Token;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AppIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AuthIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\TokenIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO\AppIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\DataObjects\Auth;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\IO\AuthIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects\Token;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\IO\TokenIO;
 use Exception;
 
 class OAuth extends AbstractService implements SecurityInterface
 {
     /** @var array|null */
-    private ?array $headers=null;
+    private ?array $headers = null;
 
-    /** @var Token|null  */
-    private ?Token $token=null;
+    /** @var Token|null */
+    private ?Token $token = null;
 
     /**
      * @param bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN
      */
     public function __construct(
-        private readonly bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN=false,
+        private readonly bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN = false,
     )
     {
     }
@@ -34,8 +35,7 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @return string|null
      */
-    public static function getBaseInterface(
-    ): ?string
+    public static function getBaseInterface(): ?string
     {
         return SecurityInterface::class;
     }
@@ -43,18 +43,16 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @return void
      */
-    public function destroy(
-    ): void
+    public function destroy(): void
     {
         $this->headers = null;
-        $this->token = null;
+        $this->token   = null;
     }
 
     /**
      * @return bool
      */
-    public function allowVisitorsToken(
-    ): bool
+    public function allowVisitorsToken(): bool
     {
         return $this->MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN;
     }
@@ -63,8 +61,7 @@ class OAuth extends AbstractService implements SecurityInterface
      * @return ApplicationInterface
      * @throws Exception
      */
-    public function getApp(
-    ): ApplicationInterface
+    public function getApp(): ApplicationInterface
     {
         return $this->objectFactory->create(AppIO::class)->readByToken($this->token->getToken());
     }
@@ -72,8 +69,7 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @return int|null
      */
-    public function getUserId(
-    ): ?int
+    public function getUserId(): ?int
     {
         return $this->token?->getUserId();
     }
@@ -81,8 +77,7 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @return bool|null
      */
-    public function isUser(
-    ): ?bool
+    public function isUser(): ?bool
     {
         return $this->token?->isUser();
     }
@@ -140,12 +135,12 @@ class OAuth extends AbstractService implements SecurityInterface
      * @throws Exception
      */
     public function generateRedirection(
-        string $clientId,
-        ?int $userId=null,
-        ?string $state=null,
+        string  $clientId,
+        ?int    $userId = null,
+        ?string $state = null,
     ): string
     {
-        if ($state === null){
+        if ($state === null) {
             $state = '';
         }
 
@@ -173,8 +168,7 @@ class OAuth extends AbstractService implements SecurityInterface
 }
 
 // @codeCoverageIgnoreStart
-if (!function_exists('getallheaders'))
-{
+if (! function_exists('getallheaders')) {
     // @codeCoverageIgnoreEnd
     function getallheaders(): array
     {

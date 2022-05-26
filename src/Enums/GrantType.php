@@ -1,4 +1,5 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\OAuth\Enums;
 
 enum GrantType: string

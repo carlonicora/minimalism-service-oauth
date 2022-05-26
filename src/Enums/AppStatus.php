@@ -1,5 +1,6 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases;
+
+namespace CarloNicora\Minimalism\Services\OAuth\Enums;
 
 enum AppStatus: int
 {
