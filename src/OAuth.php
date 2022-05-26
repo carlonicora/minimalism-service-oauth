@@ -7,11 +7,11 @@ use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Factories\ServiceFactory;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\ApplicationInterface;
 use CarloNicora\Minimalism\Interfaces\Security\Interfaces\SecurityInterface;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Auth;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Token;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AppIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AuthIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\TokenIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO\AppIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\DataObjects\Auth;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\IO\AuthIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects\Token;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\IO\TokenIO;
 use Exception;
 
 class OAuth extends AbstractService implements SecurityInterface

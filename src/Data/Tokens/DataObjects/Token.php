@@ -3,13 +3,13 @@
 /** @noinspection SenselessPropertyInspection */
 /** @noinspection PhpPropertyOnlyWrittenInspection */
 
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\TokensTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\Databases\TokensTable;
 use Exception;
 
 #[DbTable(tableClass: TokensTable::class)]

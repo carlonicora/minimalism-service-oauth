@@ -1,12 +1,12 @@
 <?php
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
 use CarloNicora\Minimalism\Services\MySQL\Factories\SqlJoinFactory;
 use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\AppsTable;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\TokensTable;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\App;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\Databases\AppsTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\DataObjects\App;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\Databases\TokensTable;
 use Exception;
 
 class AppIO extends AbstractSqlIO

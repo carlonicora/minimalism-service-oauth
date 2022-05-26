@@ -3,9 +3,9 @@ namespace CarloNicora\Minimalism\Services\OAuth\Models;
 
 use CarloNicora\Minimalism\Abstracts\AbstractModel;
 use CarloNicora\Minimalism\Enums\HttpCode;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AppIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\AuthIO;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\IO\TokenIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO\AppIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\IO\AuthIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\IO\TokenIO;
 use CarloNicora\Minimalism\Services\OAuth\Enums\GrantType;
 use CarloNicora\Minimalism\Services\OAuth\JsonApi\NonJsonApiDocument;
 use CarloNicora\Minimalism\Services\OAuth\OAuth;
@@ -41,7 +41,7 @@ class Token extends AbstractModel
             'token_type' => 'bearer'
         ];
 
-        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects\Token();
+        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects\Token();
 
         if ($grantType === GrantType::AuthorizationCode) {
             $auth = $this->objectFactory->create(AuthIO::class)->readByCode($payload['code']);

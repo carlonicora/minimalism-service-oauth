@@ -1,12 +1,12 @@
 <?php
 
-namespace CarloNicora\Minimalism\Services\OAuth\Data\OAuth\DataObjects;
+namespace CarloNicora\Minimalism\Services\OAuth\Data\AppScopes\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
-use CarloNicora\Minimalism\Services\OAuth\Data\OAuth\Databases\AppScopesTable;
+use CarloNicora\Minimalism\Services\OAuth\Data\AppScopes\Databases\AppScopesTable;
 
 #[DbTable(tableClass: AppScopesTable::class)]
 class AppScope implements SqlDataObjectInterface
