@@ -31,7 +31,7 @@ class Token implements SqlDataObjectInterface
 
     /** @var bool */
     #[DbField]
-    private bool $isUser;
+    private bool $isUser = false;
 
     /** @var string */
     #[DbField]

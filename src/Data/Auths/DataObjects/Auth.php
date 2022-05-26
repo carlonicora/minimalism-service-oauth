@@ -9,6 +9,9 @@ use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
 use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
 use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
+use CarloNicora\Minimalism\Services\MySQL\Data\SqlField;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldOption;
+use CarloNicora\Minimalism\Services\MySQL\Enums\FieldType;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auths\Databases\AuthsTable;
 use Exception;
@@ -19,15 +22,15 @@ class Auth implements SqlDataObjectInterface
     use SqlDataObjectTrait;
 
     /** @var int */
-    #[DbField]
+    #[SqlField(fieldType: FieldType::Integer, fieldOption: FieldOption::AutoIncrement)]
     private int $authId;
 
     /** @var int */
-    #[DbField]
+    #[SqlField(fieldType: FieldType::Integer)]
     private int $appId;
 
     /** @var int */
-    #[DbField]
+    #[SqlField(fieldType: FieldType::Integer)]
     private int $userId;
 
     /** @var int */
@@ -136,4 +139,5 @@ class Auth implements SqlDataObjectInterface
     {
         $this->code = $code;
     }
+
 }
