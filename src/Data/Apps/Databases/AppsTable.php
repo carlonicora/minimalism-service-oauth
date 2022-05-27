@@ -35,6 +35,6 @@ enum AppsTable
     case clientSecret;
 
     #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
-    case creationTime;
+    case createdAt;
 
 }
