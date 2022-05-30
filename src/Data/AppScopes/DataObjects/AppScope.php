@@ -52,5 +52,4 @@ class AppScope implements SqlDataObjectInterface
     {
         $this->scopeId = $scopeId;
     }
-
 }
