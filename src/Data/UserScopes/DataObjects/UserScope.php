@@ -4,11 +4,13 @@ namespace CarloNicora\Minimalism\Services\OAuth\Data\UserScopes\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbTable;
+use CarloNicora\Minimalism\Interfaces\Sql\Enums\DbFieldType;
+use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Services\MySQL\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Data\UserScopes\Databases\UserScopesTable;
 
 #[DbTable(tableClass: UserScopesTable::class)]
-class UserScope
+class UserScope implements SqlDataObjectInterface
 {
     use SqlDataObjectTrait;
 
@@ -27,6 +29,10 @@ class UserScope
     /** @var int */
     #[DbField]
     private int $scopeId;
+
+    /** @var int */
+    #[DbField(fieldType: DbFieldType::IntDateTime)]
+    private int $createdAt;
 
     /** @return int */
     public function getUserScopeId(): int{return $this->userScopeId;}
@@ -51,4 +57,10 @@ class UserScope
 
     /** @param int $scopeId */
     public function setScopeId(int $scopeId): void{$this->scopeId = $scopeId;}
+
+    /** @return int */
+    public function getCreatedAt(): int{return $this->createdAt;}
+
+    /** @param int $createdAt */
+    public function setCreatedAt(int $createdAt): void{$this->createdAt = $createdAt;}
 }

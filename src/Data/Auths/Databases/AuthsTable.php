@@ -19,8 +19,11 @@ enum AuthsTable
     case userId;
 
     #[SqlField(fieldType: FieldType::String)]
-    case expiration;
+    case code;
 
     #[SqlField(fieldType: FieldType::String)]
-    case code;
+    case expiration;
+
+    #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
+    case createdAt;
 }

@@ -20,4 +20,7 @@ enum UserScopesTable
 
     #[SqlField(fieldType: FieldType::Integer)]
     case scopeId;
+
+    #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
+    case createdAt;
 }

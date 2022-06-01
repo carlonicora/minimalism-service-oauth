@@ -23,4 +23,10 @@ enum TokensTable
 
     #[SqlField(fieldType: FieldType::String)]
     case token;
+
+    #[SqlField(fieldType: FieldType::String)]
+    case expiration;
+
+    #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
+    case createdAt;
 }

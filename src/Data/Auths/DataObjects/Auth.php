@@ -1,8 +1,4 @@
 <?php
-/** @noinspection SenselessPropertyInspection */
-
-/** @noinspection PhpPropertyOnlyWrittenInspection */
-
 namespace CarloNicora\Minimalism\Services\OAuth\Data\Auths\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
@@ -30,13 +26,17 @@ class Auth implements SqlDataObjectInterface
     #[DbField]
     private int $userId;
 
+    /** @var string */
+    #[DbField]
+    private string $code;
+
     /** @var int */
     #[DbField(fieldType: DbFieldType::IntDateTime)]
     private int $expiration;
 
-    /** @var string */
-    #[DbField]
-    private string $code;
+    /** @var int */
+    #[DbField(fieldType: DbFieldType::IntDateTime)]
+    private int $createdAt;
 
     /**
      * @throws Exception
@@ -55,58 +55,6 @@ class Auth implements SqlDataObjectInterface
     }
 
     /**
-     * @return int
-     */
-    public function getAppId(): int
-    {
-        return $this->appId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getExpiration(): int
-    {
-        return $this->expiration;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param int $appId
-     */
-    public function setAppId(
-        int $appId,
-    ): void
-    {
-        $this->appId = $appId;
-    }
-
-    /**
-     * @param int $userId
-     */
-    public function setUserId(
-        int $userId,
-    ): void
-    {
-        $this->userId = $userId;
-    }
-
-    /**
      * @param int $seconds
      */
     public function setExpirationSeconds(
@@ -116,25 +64,39 @@ class Auth implements SqlDataObjectInterface
         $this->expiration = time() + $seconds;
     }
 
-    /**
-     * @param int $authId
-     */
-    public function setAuthId(
-        int $authId
-    ): void
-    {
-        $this->authId = $authId;
-    }
+    /** @return int */
+    public function getAuthId(): int{return $this->authId;}
 
-    /**
-     * @param string $code
-     * @return void
-     */
-    public function setCode(
-        string $code
-    ): void
-    {
-        $this->code = $code;
-    }
+    /** @param int $authId */
+    public function setAuthId(int $authId): void{$this->authId = $authId;}
 
+    /** @return int */
+    public function getAppId(): int{return $this->appId;}
+
+    /** @param int $appId */
+    public function setAppId(int $appId): void{$this->appId = $appId;}
+
+    /** @return int */
+    public function getUserId(): int{return $this->userId;}
+
+    /** @param int $userId */
+    public function setUserId(int $userId): void{$this->userId = $userId;}
+
+    /** @return string */
+    public function getCode(): string{return $this->code;}
+
+    /** @param string $code */
+    public function setCode(string $code): void{$this->code = $code;}
+
+    /** @return int */
+    public function getExpiration(): int{return $this->expiration;}
+
+    /** @param int $expiration */
+    public function setExpiration(int $expiration): void{$this->expiration = $expiration;}
+
+    /** @return int */
+    public function getCreatedAt(): int{return $this->createdAt;}
+
+    /** @param int $createdAt */
+    public function setCreatedAt(int $createdAt): void{$this->createdAt = $createdAt;}
 }

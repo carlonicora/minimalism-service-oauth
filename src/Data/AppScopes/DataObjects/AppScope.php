@@ -1,5 +1,4 @@
 <?php
-
 namespace CarloNicora\Minimalism\Services\OAuth\Data\AppScopes\DataObjects;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Attributes\DbField;
@@ -21,35 +20,15 @@ class AppScope implements SqlDataObjectInterface
     #[DbField]
     private int $scopeId;
 
-    /**
-     * @return int
-     */
-    public function getAppId(): int
-    {
-        return $this->appId;
-    }
+    /** @return int */
+    public function getAppId(): int{return $this->appId;}
 
-    /**
-     * @param int $appId
-     */
-    public function setAppId(int $appId): void
-    {
-        $this->appId = $appId;
-    }
+    /** @param int $appId */
+    public function setAppId(int $appId): void{$this->appId = $appId;}
 
-    /**
-     * @return int
-     */
-    public function getScopeId(): int
-    {
-        return $this->scopeId;
-    }
+    /** @return int */
+    public function getScopeId(): int{return $this->scopeId;}
 
-    /**
-     * @param int $scopeId
-     */
-    public function setScopeId(int $scopeId): void
-    {
-        $this->scopeId = $scopeId;
-    }
+    /** @param int $scopeId */
+    public function setScopeId(int $scopeId): void{$this->scopeId = $scopeId;}
 }
