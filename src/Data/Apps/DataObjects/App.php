@@ -47,7 +47,7 @@ class App implements SqlDataObjectInterface, ApplicationInterface
     private ?string $clientSecret = null;
 
     /** @var int */
-    #[DbField(fieldType: DbFieldType::IntDateTime)]
+    #[DbField(field: AppsTable::creationTime, fieldType: DbFieldType::IntDateTime)]
     private int $createdAt;
 
     /** @return int */
