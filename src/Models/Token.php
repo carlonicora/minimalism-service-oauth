@@ -1,12 +1,13 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\OAuth\Models;
 
 use CarloNicora\Minimalism\Abstracts\AbstractModel;
 use CarloNicora\Minimalism\Enums\HttpCode;
+use CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO\AppIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Auths\IO\AuthIO;
+use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\IO\TokenIO;
 use CarloNicora\Minimalism\Services\OAuth\Enums\GrantType;
-use CarloNicora\Minimalism\Services\OAuth\IO\AppIO;
-use CarloNicora\Minimalism\Services\OAuth\IO\AuthIO;
-use CarloNicora\Minimalism\Services\OAuth\IO\TokenIO;
 use CarloNicora\Minimalism\Services\OAuth\JsonApi\NonJsonApiDocument;
 use CarloNicora\Minimalism\Services\OAuth\OAuth;
 use Exception;
@@ -27,11 +28,11 @@ class Token extends AbstractModel
     {
         $grantType = GrantType::tryFrom(strtolower($payload['grant_type']));
 
-        if ($grantType !== GrantType::AuthorizationCode && $grantType !== GrantType::ClientCredentials){
+        if ($grantType !== GrantType::AuthorizationCode && $grantType !== GrantType::ClientCredentials) {
             throw new RuntimeException('grant_type not supported', HttpCode::BadRequest->value);
         }
 
-        if ($grantType === GrantType::ClientCredentials && !$OAuth->allowVisitorsToken()){
+        if ($grantType === GrantType::ClientCredentials && ! $OAuth->allowVisitorsToken()) {
             throw new RuntimeException('grant_type not supported', HttpCode::BadRequest->value);
         }
 
@@ -41,7 +42,7 @@ class Token extends AbstractModel
             'token_type' => 'bearer'
         ];
 
-        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\Token($this->objectFactory);
+        $token = new \CarloNicora\Minimalism\Services\OAuth\Data\Tokens\DataObjects\Token();
 
         if ($grantType === GrantType::AuthorizationCode) {
             $auth = $this->objectFactory->create(AuthIO::class)->readByCode($payload['code']);
@@ -57,7 +58,7 @@ class Token extends AbstractModel
             $app = $this->objectFactory->create(AppIO::class)->readByClientId($payload['client_id']);
 
             $token->setAppId($app->getId());
-            $token->setUserId((int)(microtime(true)*1000));
+            $token->setUserId((int)(microtime(true) * 1000));
             $token->setIsUser(false);
         }
 

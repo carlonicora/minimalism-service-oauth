@@ -1,4 +1,5 @@
 <?php
+
 namespace CarloNicora\Minimalism\Services\OAuth\JsonApi;
 
 use CarloNicora\JsonApi\Document;
