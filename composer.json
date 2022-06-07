@@ -1,12 +1,12 @@
 {
   "name": "carlonicora/minimalism-service-oauth",
   "description": "Oauth service for minimalism",
-  "version": "2.0.0-beta27",
+  "version": "2.0.0",
   "homepage": "https://carlonicora.com",
   "time": "2022-01-26",
   "license": "MIT",
   "type": "library",
-  "minimum-stability": "beta",
+  "minimum-stability": "stable",
   "authors": [
     {
       "name": "Carlo Nicora",

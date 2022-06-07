@@ -30,11 +30,9 @@ enum AppsTable
     #[SqlField(fieldType: FieldType::String)]
     case clientId;
 
-
     #[SqlField(fieldType: FieldType::String)]
     case clientSecret;
 
     #[SqlField(fieldType: FieldType::String, fieldOption: FieldOption::TimeCreate)]
-    case creationTime;
-
+    case createdAt;
 }
