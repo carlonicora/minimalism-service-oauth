@@ -2,8 +2,8 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data\Apps\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlJoinFactory;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
+use CarloNicora\Minimalism\Interfaces\Sql\Factories\SqlQueryFactory;
+use CarloNicora\Minimalism\Interfaces\Sql\Factories\SqlJoinFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Apps\Databases\AppsTable;
 use CarloNicora\Minimalism\Services\OAuth\Data\Apps\DataObjects\App;
 use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\Databases\TokensTable;
@@ -23,7 +23,7 @@ class AppIO extends AbstractSqlIO
         $factory = SqlQueryFactory::create(AppsTable::class)
             ->selectAll()
             ->addJoin(
-                new SqlJoinFactory(
+                SqlJoinFactory::create(
                     primaryKey: AppsTable::appId,
                     foreignKey: TokensTable::appId,
                 ),

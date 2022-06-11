@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data\Auths\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
+use CarloNicora\Minimalism\Interfaces\Sql\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auths\Databases\AuthsTable;
 use CarloNicora\Minimalism\Services\OAuth\Data\Auths\DataObjects\Auth;
 use Exception;

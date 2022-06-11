@@ -2,7 +2,7 @@
 namespace CarloNicora\Minimalism\Services\OAuth\Data\UserScopes\IO;
 
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
-use CarloNicora\Minimalism\Services\MySQL\Factories\SqlQueryFactory;
+use CarloNicora\Minimalism\Interfaces\Sql\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\UserScopes\Databases\UserScopesTable;
 use CarloNicora\Minimalism\Services\OAuth\Data\UserScopes\DataObjects\UserScope;
 use Exception;
