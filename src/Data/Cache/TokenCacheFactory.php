@@ -8,11 +8,11 @@ class TokenCacheFactory extends AbstractCacheBuilderFactory
 {
     /**
      * @param string $token
-     * @return CacheBuilderInterface
+     * @return CacheBuilderInterface|null
      */
     public static function token(
         string $token,
-    ): CacheBuilderInterface
+    ): ?CacheBuilderInterface
     {
         return self::create(
             cacheName: 'token',
