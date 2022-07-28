@@ -165,6 +165,20 @@ class OAuth extends AbstractService implements SecurityInterface
 
         return $response;
     }
+
+    /**
+     * @param int $userId
+     * @return void
+     * @throws Exception
+     */
+    public function deleteAuthDataForUser(
+        int $userId
+    ): void
+    {
+        $tokenIO = $this->objectFactory->create(className: TokenIO::class);
+        $tokenIO->deleteByUserId($userId);
+    }
+
 }
 
 // @codeCoverageIgnoreStart

@@ -1,6 +1,7 @@
 <?php
 namespace CarloNicora\Minimalism\Services\OAuth\Data\Tokens\IO;
 
+use CarloNicora\Minimalism\Exceptions\MinimalismException;
 use CarloNicora\Minimalism\Interfaces\Sql\Abstracts\AbstractSqlIO;
 use CarloNicora\Minimalism\Interfaces\Sql\Factories\SqlQueryFactory;
 use CarloNicora\Minimalism\Services\OAuth\Data\Cache\TokenCacheFactory;
@@ -19,7 +20,7 @@ class TokenIO extends AbstractSqlIO
         string $token,
     ): Token
     {
-        $factory = SqlQueryFactory::create(TokensTable::class)
+        $factory = SqlQueryFactory::create(tableClass: TokensTable::class)
             ->selectAll()
             ->addParameter(TokensTable::token, $token);
 
@@ -45,4 +46,21 @@ class TokenIO extends AbstractSqlIO
             responseType: Token::class,
         );
     }
+
+    /**
+     * @param int $userId
+     * @return void
+     * @throws MinimalismException
+     */
+    public function deleteByUserId(
+        int $userId
+    ): void
+    {
+        $this->data->delete(
+            queryFactory: SqlQueryFactory::create(tableClass: TokensTable::class)
+                ->delete()
+                ->addParameter(field: TokensTable::userId, value: $userId)
+        );
+    }
+
 }
