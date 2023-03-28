@@ -8,6 +8,7 @@ use CarloNicora\Minimalism\Interfaces\Sql\Interfaces\SqlDataObjectInterface;
 use CarloNicora\Minimalism\Interfaces\Sql\Traits\SqlDataObjectTrait;
 use CarloNicora\Minimalism\Services\OAuth\Data\Tokens\Databases\TokensTable;
 use Exception;
+use Firebase\JWT\JWT;
 
 #[DbTable(tableClass: TokensTable::class)]
 class Token implements SqlDataObjectInterface
@@ -45,9 +46,22 @@ class Token implements SqlDataObjectInterface
     /**
      * @throws Exception
      */
-    public function __construct()
+    public function __construct(
+    )
     {
-        $this->token = bin2hex(random_bytes(32));
+    }
+
+    public function generateToken(
+        string $privateKey,
+    ): void {
+        $data = [
+            'userId' => $this->userId,
+            'isUser' => $this->isUser,
+            'appId' => $this->appId,
+            'expiration' => $this->expiration,
+        ];
+
+        $this->token = JWT::encode($data, $privateKey, 'RS256');
     }
 
     /*** @return int */

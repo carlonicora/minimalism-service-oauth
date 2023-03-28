@@ -62,6 +62,8 @@ class Token extends AbstractModel
             $token->setIsUser(false);
         }
 
+        $token->generateToken($OAuth->getPrivateKey());
+
         $token = $this->objectFactory->create(TokenIO::class)->insert($token);
 
         $response['access_token'] = $token->getToken();
