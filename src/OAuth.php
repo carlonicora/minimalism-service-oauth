@@ -26,10 +26,12 @@ class OAuth extends AbstractService implements SecurityInterface
     /**
      * @param string $MINIMALISM_SERVICE_OAUTH_PRIVATE_KEY
      * @param bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN
+     * @param int $MINIMALISM_SERVICE_OAUTH_TOKEN_DURATION
      */
     public function __construct(
         private readonly string $MINIMALISM_SERVICE_OAUTH_PRIVATE_KEY,
         private readonly bool $MINIMALISM_SERVICE_OAUTH_ALLOW_VISITORS_TOKEN = false,
+        private readonly int $MINIMALISM_SERVICE_OAUTH_TOKEN_DURATION = 3600,
     )
     {
     }
@@ -39,6 +41,14 @@ class OAuth extends AbstractService implements SecurityInterface
      */
     public function getPrivateKey(): string {
         return $this->MINIMALISM_SERVICE_OAUTH_PRIVATE_KEY;
+    }
+    
+    /**
+     * @return int
+     */
+    public function getTokenDuration(): int
+    {
+        return $this->MINIMALISM_SERVICE_OAUTH_TOKEN_DURATION;
     }
 
     /**
